@@ -1,6 +1,6 @@
 # 0x00. C - Hello, World
 
-Resources
+## Resources
 
 - [Everything you need to know to start with C.pdf](https://s3.amazonaws.com/alx-intranet.hbtn.io/uploads/misc/2022/4/e0ccf91eec6b977a9e00ed384dc285df9c2772e3.pdf?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIARDDGGGOUSBVO6H7D%2F20230615%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20230615T145818Z&X-Amz-Expires=86400&X-Amz-SignedHeaders=host&X-Amz-Signature=e3668ce5000e97e2d1a1d431fc271548c2ab95d1d43b99bda389a670ad2e4ee9)
 - [Dennis Ritchie](https://en.wikipedia.org/wiki/Dennis_Ritchie)
@@ -13,7 +13,7 @@ Resources
 - [Hash-bang under the hood](https://twitter.com/unix_byte/status/1024147947393495040?s=21)https://twitter.com/unix_byte/status/1024147947393495040?s=21
 - [Linus Torvalds on C vs. C++](http://harmful.cat-v.org/software/c++/linus)http://harmful.cat-v.org/software/c++/linus
 
-Tasks
+## Tasks
 
 0. [Preprocessor](./0-preprocessor)
 1. [Compiler](./1-compiler)
