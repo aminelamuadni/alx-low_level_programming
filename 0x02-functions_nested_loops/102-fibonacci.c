@@ -7,8 +7,8 @@
  */
 int main(void)
 {
-    unsigned long num1 = 1, num2 = 2, next;
-    int count;
+	unsigned long num1 = 0, num2 = 1, next;
+	int count;
 
 	for (count = 0; count < 50; ++count)
 	{
