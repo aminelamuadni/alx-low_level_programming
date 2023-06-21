@@ -1,4 +1,4 @@
-#include"main.h"
+#include <stdio.h>
 
 /**
  * main - Entry point of the program
@@ -7,24 +7,38 @@
  */
 int main(void)
 {
-	int count;
-	unsigned long num1 = 1, num2 = 2, next;
+	unsigned long int a, b, c, d1, d2, e1, e2;
 
-	printf("%llu, %llu, ", num1, num2);
+	a = 1;
+	b = 2;
 
-	for (count = 2; count < 98; count++)
+	printf("%lu", a);
+
+	for (unsigned long int i = 1; i < 91; i++)
 	{
-		next = num1 + num2;
-		printf("%llu", next);
+		printf(", %lu", b);
+		c = b + a;
+		a = b - a;
+		b = c;
+	}
 
-		if (count != 97)
-			printf(", ");
+	d1 = a / 1000000000;
+	d2 = a % 1000000000;
+	e1 = b / 1000000000;
+	e2 = b % 1000000000;
 
-		num1 = num2;
-		num2 = next;
+	for (unsigned long int i = 92; i < 99; ++i)
+	{
+		printf(", %lu", e1 + (e2 / 1000000000));
+		printf("%lu", e2 % 1000000000);
+		e1 = e1 + d1;
+		d1 = e1 - d1;
+		e2 = e2 + d2;
+		d2 = e2 - d2;
 	}
 
 	printf("\n");
+
 	return 0;
 }
 
