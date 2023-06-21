@@ -8,7 +8,7 @@
 int main(void)
 {
 	unsigned long num1 = 0, num2 = 2, next;
-	float sum;
+	unsigned long sum;
 
 	while (1)
 	{
