@@ -7,16 +7,16 @@
  */
 int main(void)
 {
-    unsigned long num1 = 1, num2 = 2;
+    unsigned long num1 = 1, num2 = 2, next;
     int count;
 
 	for (count = 0; count < 50; ++count)
 	{
-		sum = num1 + num2;
-		printf("%lu", sum);
+		next = num1 + num2;
+		printf("%lu", next);
 
 		num1 = num2;
-		num2 = sum;
+		num2 = next;
 
 		if (count == 49)
 			printf("\n");
