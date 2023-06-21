@@ -8,7 +8,7 @@
 int main(void)
 {
 	unsigned long num1 = 0, num2 = 2, next;
-	unsigned long sum;
+	float sum;
 
 	while (1)
 	{
@@ -23,7 +23,7 @@ int main(void)
 		num1 = num2;
 		num2 = next;
 	}
-	printf("%lu\n", sum);
+	printf("%.0f\n", sum);
 
 	return (0);
 }
