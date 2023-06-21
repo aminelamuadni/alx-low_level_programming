@@ -23,7 +23,7 @@ int main(void)
 		num1 = num2;
 		num2 = next;
 	}
-	printf("%.0f\n", sum);
+	printf("%lu\n", sum);
 
 	return (0);
 }
