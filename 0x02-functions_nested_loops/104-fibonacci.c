@@ -7,21 +7,22 @@
  */
 int main(void)
 {
-    unsigned int num1 = 1, num2 = 2, next;
-    int count;
+	unsigned int a = 1, b = 2, temp;
+	int count;
 
-    printf("%u, %u", num1, num2);
+	printf("%u, %u", a, b);
 
-    for (count = 3; count <= 98; count++)
-    {
-        next = num1 + num2;
-        printf(", %u", next);
-        num1 = num2;
-        num2 = next;
-    }
+	for (count = 3; count <= 98; count++)
+	{
+		temp = a + b;
+		printf(", %u", temp);
 
-    printf("\n");
+		a = b;
+		b = temp;
+	}
 
-    return 0;
+	printf("\n");
+
+	return 0;
 }
 
