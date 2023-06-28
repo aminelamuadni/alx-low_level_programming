@@ -16,10 +16,9 @@ int main(void)
 
 	while (sum < 2772)
 	{
-		n = rand() % 128;
+		n = rand() % 94 + 33;
 		sum += n;
 
-		/* ensure sum does not exceed 2772 */
 		if (sum > 2772)
 		{
 			sum -= n;
