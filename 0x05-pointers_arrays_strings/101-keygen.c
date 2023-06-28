@@ -2,25 +2,27 @@
 #include <stdlib.h>
 #include <time.h>
 
+#define PASSWORD_LENGTH 10  /* Adjust this to match the requirement */
+
 /**
- * main - Entry point
+ * main - Entry point of the program
  *
  * Return: Always 0 (Success)
  */
 int main(void)
 {
-    srand(time(0));
-    int password_length = 10; /* you can adjust this to match the requirement */
-    char password[password_length + 1];
-    int i;
+	int i;
+	char password[PASSWORD_LENGTH + 1];
 
-    for (i = 0; i < password_length; i++)
-    {
-        /* Generate a random printable ASCII character */
-        password[i] = rand() % 94 + 33;
-    }
-    password[i] = '\0';
-    printf("%s\n", password);
+	srand(time(0));
 
-    return (0);
+	for (i = 0; i < PASSWORD_LENGTH; i++)
+	{
+		/* Generate a random printable ASCII character */
+		password[i] = rand() % 94 + 33;
+	}
+	password[i] = '\0';
+	printf("%s\n", password);
+
+	return (0);
 }
