@@ -12,13 +12,13 @@ void rev_string(char *s)
 	int i;
 	char temp;
 
-	// Determine the length of the string
+	/* Determine the length of the string */
 	while (s[length] != '\0')
 	{
 		length++;
 	}
 
-	// Swap characters
+	/* Swap characters */
 	for (i = 0; i < length / 2; i++)
 	{
 		temp = s[i];
