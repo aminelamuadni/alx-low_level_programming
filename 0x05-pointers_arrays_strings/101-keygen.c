@@ -1,9 +1,6 @@
 #include <stdlib.h>
-#include <stdio.h>
 #include <time.h>
-
-#define PASSWORD_LENGTH 10  /* Adjust this to match the requirement */
-#define CHECKSUM 1275 /* Example checksum value */
+#include <stdio.h>
 
 /**
  * main - Entry point of the program
@@ -12,23 +9,27 @@
  */
 int main(void)
 {
-	int i, sum = 0;
-	char password[PASSWORD_LENGTH + 1];
+	int sum = 0;
+	int n;
+	char password[2772];
 
-	srand(time(0));
+	srand(time(NULL));
 
-	for (i = 0; i < PASSWORD_LENGTH - 1; i++)
+	while (sum < 2772)
 	{
-		/* Generate a random printable ASCII character */
-		password[i] = rand() % 94 + 33;
-		sum += password[i];
+		n = rand() % 128;
+		sum += n;
+
+		/* ensure sum does not exceed 2772 */
+		if (sum > 2772)
+		{
+			sum -= n;
+			continue;
+		}
+		else
+		{
+			printf("%c", n);
+		}
 	}
-
-	/* Make sure the sum of all characters equals the required checksum */
-	password[i] = CHECKSUM - sum;
-	password[i + 1] = '\0';
-
-	printf("%s\n", password);
-
 	return (0);
 }
