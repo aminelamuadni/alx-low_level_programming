@@ -9,27 +9,26 @@
  */
 int main(void)
 {
-	int sum = 0;
-	int n;
+	int password[100];
+	int sum, i, n;
+
+	sum = 0;	
 
 	srand(time(NULL));
 
-	while (sum < 2772)
+	for (i = 0; i < 100; i++)
 	{
-		n = rand() % 94 + 33;
-		sum += n;
-
-		if (sum > 2772)
+		password[i] = rand() % 78;
+		sum += (password[i] + '0');
+		putchar(password[i] + '0');
+		if ((2772 - sum) - '0' < 78)
 		{
-			sum -= n;
-			continue;
-		}
-		else
-		{
-			printf("%c", n);
+			n = 2772 - sum - '0';
+			sum += n;
+			putchar(n + '0');
+			break;
 		}
 	}
-	printf("\n");
 
 	return (0);
 }
