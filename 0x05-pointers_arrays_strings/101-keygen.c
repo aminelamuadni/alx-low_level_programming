@@ -11,7 +11,6 @@ int main(void)
 {
 	int sum = 0;
 	int n;
-	char password[2772];
 
 	srand(time(NULL));
 
@@ -31,5 +30,7 @@ int main(void)
 			printf("%c", n);
 		}
 	}
+	printf("\n");
+
 	return (0);
 }
