@@ -1,12 +1,12 @@
 #include "main.h"
 
 /**
- * infinite_add - adds two numbers
- * @n1: number one.
- * @n2: number two.
- * @r: buffer that the function will use to store the result.
- * @size_r: buffer size:
- * Return: the pointer to dest.
+ * infinite_carry - adds two numbers
+ * @n1: first input string
+ * @n2: second input string
+ * @r: buffer that the function will use to store the result
+ * @size_r: buffer size
+ * Return: pointer to the result.
  */
 char *infinite_add(char *n1, char *n2, char *r, int size_r)
 {
