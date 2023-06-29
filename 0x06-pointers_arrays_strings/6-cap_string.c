@@ -1,42 +1,34 @@
 /**
- * cap_string - Capitalizes all words of a string
+ * string_toupper - Changes all lowercase letters of a string to uppercase
  * @s: The string to change
  *
  * Return: A pointer to the changed string
  */
-char *cap_string(char *s)
+char *string_toupper(char *s)
 {
-    int i = 0;
-    int new_word = 1;
+	int i = 0;
 
-    while (s[i])
-    {
-        /* Check for separators */
-        if (s[i] == ' ' || s[i] == '\t' || s[i] == '\n' || s[i] == ',' ||
-            s[i] == ';' || s[i] == '.' || s[i] == '!' || s[i] == '?' ||
-            s[i] == '"' || s[i] == '(' || s[i] == ')' || s[i] == '{' ||
-            s[i] == '}')
-        {
-            new_word = 1;
-        }
-        /* If it's a new word, capitalize the first letter */
-        else if (new_word && s[i] >= 'a' && s[i] <= 'z')
-        {
-            s[i] -= 'a' - 'A';
-            new_word = 0;
-        }
-        /* If it's not a new word and it's an uppercase letter, make it lowercase */
-        else if (!new_word && s[i] >= 'A' && s[i] <= 'Z')
-        {
-            s[i] += 'a' - 'A';
-        }
-        else
-        {
-            new_word = 0;
-        }
+	while (s[i] != '\0')
+	{
+		if (s[i] >= 97 && s[i] <= 122)
+		{
+			if (i == 0)
+			{
+				s[i] -= 32;
+			}
 
-        i++;
-    }
+			if (s[i - 1] == 32 || s[i - 1] == 9 || s[i - 1] == 10 ||
+				s[i - 1] == 44 || s[i - 1] == 59 || s[i - 1] == 46 ||
+				s[i - 1] == 33 || s[i - 1] == 63 || s[i - 1] == 34 ||
+				s[i - 1] == 40 || s[i - 1] == 41 || s[i - 1] == 123 ||
+				s[i - 1] == 124)
+			{
+				s[i] -= 32;
+			}
+		}
 
-    return (s);
+		i++;
+	}
+
+	return (s);
 }
