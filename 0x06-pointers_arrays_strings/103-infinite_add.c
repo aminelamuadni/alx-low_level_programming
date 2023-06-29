@@ -34,7 +34,7 @@ char *infinite_add(char *n1, char *n2, char *r, int size_r)
 		else
 			carry = 0;
 		if (op > 0)
-		*(r + bigger) = (op % 10) + 48;
+			*(r + bigger) = (op % 10) + 48;
 		else
 			*(r + bigger) = '0';
 		if (len1 > 0)
