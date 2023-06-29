@@ -11,7 +11,7 @@
  * Return: pointer to the result.
  */
 
-char *infinite_carry(char *n1, char *n2, char *r, int size_r)
+char *infinite_add(char *n1, char *n2, char *r, int size_r)
 {
 	int len1 = 0, len2 = 0, op, bigger, i, j, carry = 0;
 
