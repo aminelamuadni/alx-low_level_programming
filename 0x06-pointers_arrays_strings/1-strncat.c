@@ -12,13 +12,11 @@ char *_strncat(char *dest, char *src, int n)
 
 	i = 0;
 
-	/* Find the end of the destination string */
 	while (dest[i] != '\0')
 	{
 		i++;
 	}
 
-	/* Append the first n characters of the source string to the destination string */
 	for (j = 0; j < n && src[j] != '\0'; j++, i++)
 	{
 		dest[i] = src[j];
