@@ -2,55 +2,56 @@
 
 /**
  * infinite_add - adds two numbers
- * @n1: first string number
- * @n2: second string number
- * @r: buffer that the function will use to store the result
+ * @n1: first number
+ * @n2: second number
+ * @r: buffer to store result
  * @size_r: buffer size
- * Return: pointer to result
+ *
+ * Return: pointer to result, 0 if result can't be stored in r
  */
 char *infinite_add(char *n1, char *n2, char *r, int size_r)
 {
-	int len1, len2, bigger, op, ad = 0;
+	int i, j, k, l, m, n;
 
-	len1 = 0;
-	while (n1[len1] != '\0')
-		len1++;
-	len2 = 0;
-	while (n2[len2] != '\0')
-		len2++;
-
-	bigger = (len1 >= len2) ? len1 : len2;
-
-	if (size_r <= (bigger + 1))
+	for (i = 0; n1[i] != '\0'; i++)
+		;
+	for (j = 0; n2[j] != '\0'; j++)
+		;
+	if (i > j)
+		l = i;
+	else
+		l = j;
+	if (size_r <= l + 1)
 		return (0);
-
-	r[bigger + 1] = '\0';
-	len1--;
-	len2--;
-
-	while (bigger >= 0)
+	m = 0;
+	for (k = 0; k <= l; k++)
 	{
-		op = ad;
-		if (len1 >= 0)
-			op += n1[len1--] - '0';
-		if (len2 >= 0)
-			op += n2[len2--] - '0';
-
-		if (op >= 10)
+		n = m;
+		if (i > 0)
+			n += n1[--i] - '0';
+		if (j > 0)
+			n += n2[--j] - '0';
+		if (n > 9)
 		{
-			ad = 1;
-			op -= 10;
+			m = 1;
+			r[k] = (n % 10) + '0';
 		}
 		else
 		{
-			ad = 0;
+			m = 0;
+			r[k] = n + '0';
 		}
-
-		r[bigger--] = (op + '0');
 	}
-
-	if (r[0] == '0')
-		return (r + 1);
-
+	if (m == 1)
+		r[l] = '1';
+	else
+		l--;
+	for (k = 0; k <= l / 2; k++)
+	{
+		m = r[k];
+		r[k] = r[l - k];
+		r[l - k] = m;
+	}
+	r[l + 1] = '\0';
 	return (r);
 }
