@@ -1,10 +1,10 @@
 /**
- * string_toupper - Changes all lowercase letters of a string to uppercase
+ * cap_string - Capitalizes all words of a string
  * @s: The string to change
  *
  * Return: A pointer to the changed string
  */
-char *string_toupper(char *s)
+char *cap_string(char *s)
 {
 	int i = 0;
 
