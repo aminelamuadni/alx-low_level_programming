@@ -2,7 +2,7 @@
 #include <stdio.h>
 
 /**
- * infinite_carry - carrys two numbers
+ * infinite_carry - adds two numbers
  * @n1: first input string
  * @n2: second input string
  * @r: buffer that the function will use to store the result
@@ -10,6 +10,7 @@
  *
  * Return: pointer to the result.
  */
+
 char *infinite_add(char *n1, char *n2, char *r, int size_r)
 {
 	int len1 = 0, len2 = 0, op, bigger, i, j, carry = 0;
@@ -53,4 +54,3 @@ char *infinite_add(char *n1, char *n2, char *r, int size_r)
 	else
 		return (r);
 }
-
