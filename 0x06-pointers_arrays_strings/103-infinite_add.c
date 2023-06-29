@@ -2,7 +2,7 @@
 #include <stdio.h>
 
 /**
- * infinite_add - adds two numbers
+ * infinite_carry - carrys two numbers
  * @n1: first input string
  * @n2: second input string
  * @r: buffer that the function will use to store the result
@@ -10,7 +10,8 @@
  *
  * Return: pointer to the result.
  */
-char *add_strings(char *n1, char *n2, char *r, int r_index)
+
+char *infinite_carry(char *n1, char *n2, char *r, int size_r)
 {
 	int len1 = 0, len2 = 0, op, bigger, i, j, carry = 0;
 
@@ -22,10 +23,10 @@ char *add_strings(char *n1, char *n2, char *r, int r_index)
 		bigger = len1;
 	else
 		bigger = len2;
-	if (r_index <= bigger + 1)
+	if (size_r <= bigger + 1)
 		return (0);
 	r[bigger + 1] = '\0';
-	len1--, len2--, r_index--;
+	len1--, len2--, size_r--;
 	i = *(n1 + len1) - 48, j = *(n2 + len2) - 48;
 	while (bigger >= 0)
 	{
@@ -35,7 +36,7 @@ char *add_strings(char *n1, char *n2, char *r, int r_index)
 		else
 			carry = 0;
 		if (op > 0)
-			*(r + bigger) = (op % 10) + 48;
+		*(r + bigger) = (op % 10) + 48;
 		else
 			*(r + bigger) = '0';
 		if (len1 > 0)
@@ -46,7 +47,7 @@ char *add_strings(char *n1, char *n2, char *r, int r_index)
 			len2--, j = *(n2 + len2) - 48;
 		else
 			j = 0;
-		bigger--, r_index--;
+		bigger--, size_r--;
 	}
 	if (*(r) == '0')
 		return (r + 1);
