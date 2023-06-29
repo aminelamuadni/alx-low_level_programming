@@ -10,39 +10,46 @@
  *
  * Return: pointer to the result.
  */
-char *infinite_add(char *n1, char *n2, char *r, int size_r)
+char *add_strings(char *n1, char *n2, char *r, int r_index)
 {
-	int i, j, k, l, m, n;
-	int carry = 0;
+	int len1 = 0, len2 = 0, op, bigger, i, j, carry = 0;
 
-	for (i = 0; n1[i] != '\0'; i++)
-		;
-	for (j = 0; n2[j] != '\0'; j++)
-		;
-	if (i > size_r || j > size_r)
+	while (*(n1 + len1) != '\0')
+		len1++;
+	while (*(n2 + len2) != '\0')
+		len2++;
+	if (len1 >= len2)
+		bigger = len1;
+	else
+		bigger = len2;
+	if (r_index <= bigger + 1)
 		return (0);
-	i--;
-	j--;
-	l = 0;
-	for (k = 0; k < size_r - 1; k++, i--, j--, l++)
+	r[bigger + 1] = '\0';
+	len1--, len2--, r_index--;
+	i = *(n1 + len1) - 48, j = *(n2 + len2) - 48;
+	while (bigger >= 0)
 	{
-		m = (i >= 0) ? n1[i] - '0' : 0;
-		n = (j >= 0) ? n2[j] - '0' : 0;
-		if ((m + n + carry) / 10 != 0)
-			r[l] = (m + n + carry) % 10 + '0', carry = 1;
+		op = i + j + carry;
+		if (op >= 10)
+			carry = op / 10;
 		else
-			r[l] = (m + n + carry) + '0', carry = 0;
+			carry = 0;
+		if (op > 0)
+			*(r + bigger) = (op % 10) + 48;
+		else
+			*(r + bigger) = '0';
+		if (len1 > 0)
+			len1--, i = *(n1 + len1) - 48;
+		else
+			i = 0;
+		if (len2 > 0)
+			len2--, j = *(n2 + len2) - 48;
+		else
+			j = 0;
+		bigger--, r_index--;
 	}
-	if (carry == 1)
-		r[l] = 1 + '0', l++;
-	if (l == size_r)
-		return (0);
-	r[l] = '\0';
-	for (i = 0, j = l - 1; i < j; i++, j--)
-	{
-		char temp = r[i];
-		r[i] = r[j];
-		r[j] = temp;
-	}
-	return (r);
+	if (*(r) == '0')
+		return (r + 1);
+	else
+		return (r);
 }
