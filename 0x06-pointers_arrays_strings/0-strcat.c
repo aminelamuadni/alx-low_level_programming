@@ -1,5 +1,3 @@
-#include "main.h"
-
 /**
  * _strcat - Concatenates two strings
  * @dest: The destination string
@@ -14,15 +12,15 @@ char *_strcat(char *dest, char *src)
 	i = 0;
 
 	/* Find the end of the destination string */
-	while (dest[i])
+	while (dest[i] != '\0')
 		i++;
 
 	/* Append the source string to the destination string */
 	for (j = 0; src[j] != '\0'; j++)
-		dest[i + j] = src[j];
+		dest[i] = src[j];
 
 	/* Null-terminate the destination string */
-	dest[i + j] = '\0';
+	dest[i] = '\0';
 
-	return dest;
+	return (dest);
 }
