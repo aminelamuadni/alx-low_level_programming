@@ -1,64 +1,46 @@
 #include "main.h"
-#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
 /**
- * is_digit - checks if a string contains only digits
- * @s: string to check
+ * _realloc - reallocates a memory block using malloc and free
+ * @ptr: pointer to the memory previously allocated
+ * @old_size: size, in bytes, of the allocated space for ptr
+ * @new_size: new size, in bytes of the new memory block
  *
- * Return: 0 if string contains non-digits, 1 otherwise
+ * Return: pointer to the new memory block
  */
-int is_digit(char *s)
+void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size)
 {
-	int i, length = strlen(s);
+	void *newptr;
 
-	for (i = 0; i < length; i++)
+	if (new_size == old_size)
+		return (ptr);
+
+	if (ptr == NULL)
 	{
-		if (s[i] < '0' || s[i] > '9')
-			return (0);
+		newptr = malloc(new_size);
+		if (newptr == NULL)
+			return (NULL);
+
+		return (newptr);
 	}
 
-	return (1);
-}
-
-/**
- * print_error - prints error message and exits program
- */
-void print_error(void)
-{
-	int i;
-	char *error = "Error\n";
-
-	for (i = 0; error[i]; i++)
+	if (new_size == 0 && ptr != NULL)
 	{
-		_putchar(error[i]);
+		free(ptr);
+		return (NULL);
 	}
 
-	exit(98);
-}
-
-/**
- * main - multiplies two positive numbers
- * @argc: argument count
- * @argv: argument vector
- *
- * Return: 0 on success, 1 on failure
- */
-int main(int argc, char *argv[])
-{
-	long num1, num2, product;
-
-	if (argc != 3 || !is_digit(argv[1]) || !is_digit(argv[2]))
+	newptr = malloc(new_size);
+	if (newptr == NULL)
 	{
-		print_error();
+		free(ptr);
+		return (NULL);
 	}
 
-	num1 = atoi(argv[1]);
-	num2 = atoi(argv[2]);
-	product = num1 * num2;
+	memcpy(newptr, ptr, old_size < new_size ? old_size : new_size);
+	free(ptr);
 
-	printf("%ld\n", product);
-
-	return (0);
+	return (newptr);
 }
