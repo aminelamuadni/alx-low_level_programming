@@ -27,15 +27,46 @@ int is_digit(char *s)
  */
 void print_error(void)
 {
-	int i;
-	char *error = "Error\n";
+	printf("Error\n");
+	exit(98);
+}
 
-	for (i = 0; error[i]; i++)
+/**
+ * multiply - performs multiplication of two positive numbers
+ * @num1: first number
+ * @num2: second number
+ *
+ * Return: pointer to the result of multiplication
+ */
+char *multiply(char *num1, char *num2)
+{
+	int len1 = strlen(num1);
+	int len2 = strlen(num2);
+	int len_res = len1 + len2;
+	int i, j, k, carry;
+	char *result = malloc((len_res + 1) * sizeof(char));
+
+	if (result == NULL)
+		print_error();
+
+	for (i = 0; i < len_res; i++)
+		result[i] = '0';
+	result[len_res] = '\0';
+
+	for (i = len1 - 1; i >= 0; i--)
 	{
-		_putchar(error[i]);
+		carry = 0;
+		for (j = len2 - 1, k = len_res - (len1 - i); j >= 0; j--, k--)
+		{
+			int product = (num1[i] - '0') * (num2[j] - '0') + (result[k] - '0') + carry;
+
+			carry = product / 10;
+			result[k] = (product % 10) + '0';
+		}
+		result[k] += carry;
 	}
 
-	exit(98);
+	return (result);
 }
 
 /**
@@ -47,18 +78,17 @@ void print_error(void)
  */
 int main(int argc, char *argv[])
 {
-	long num1, num2, product;
+	char *num1, *num2, *product;
 
 	if (argc != 3 || !is_digit(argv[1]) || !is_digit(argv[2]))
-	{
 		print_error();
-	}
 
-	num1 = atoi(argv[1]);
-	num2 = atoi(argv[2]);
-	product = num1 * num2;
+	num1 = argv[1];
+	num2 = argv[2];
+	product = multiply(num1, num2);
 
-	printf("%ld\n", product);
+	printf("%s\n", product);
 
+	free(product);
 	return (0);
 }
