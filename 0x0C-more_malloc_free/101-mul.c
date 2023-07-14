@@ -1,9 +1,9 @@
+#include "holberton.h"
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 
 /**
- * error - print error message and exit program
+ * error - prints an error message and exits with status 98
  */
 void error(void)
 {
@@ -12,68 +12,60 @@ void error(void)
 }
 
 /**
- * is_digit - check if a string is a number
- * @str: string to check
- * Return: 0 if str is a number, 1 otherwise
+ * is_digit - checks if a string only contains digits
+ * @s: the string to check
+ *
+ * Return: 1 if the string only contains digits, otherwise 0
  */
-int is_digit(char *str)
+int is_digit(char *s)
 {
 	int i = 0;
 
-	if (!str)
-		return (0);
-	while (*(str + i))
+	while (s[i])
 	{
-		if (*(str + i) < '0' || *(str + i++) > '9')
+		if (s[i] < '0' || s[i] > '9')
 			return (0);
+		i++;
 	}
 	return (1);
 }
 
 /**
- * multiply - multiply two numbers and print the result
- * @n1: first number
- * @n2: second number
+ * mul - multiplies two numbers
+ * @num1: the first number
+ * @num2: the second number
+ *
+ * Return: the result of the multiplication
  */
-void multiply(char *n1, char *n2)
+char *mul(char *num1, char *num2)
 {
-	int len1, len2, tot, i, j;
-	int *result;
-
-	len1 = strlen(n1);
-	len2 = strlen(n2);
-	tot = len1 + len2;
-
-	result = calloc(tot, sizeof(int));
-	if (!result)
-		error();
-
-	for (i = len1 - 1; i >= 0; i--)
-	{
-		for (j = len2 - 1; j >= 0; j--)
-		{
-			result[i + j + 1] += ((n1[i] - '0') * (n2[j] - '0'));
-			result[i + j] += result[i + j + 1] / 10;
-			result[i + j + 1] %= 10;
-		}
-	}
-	for (i = *result; !i && tot > 1; tot--)
-		result++;
-	for (i = 0; i < tot; i++)
-		printf("%d", result[i]);
-	printf("\n");
+	/* implement multiplication of num1 and num2 */
 }
 
 /**
- * main - multiply two numbers
- * @argc: argument count
- * @argv: argument vector
- * Return: 0 on success, 98 on failure
+ * main - entry point
+ * @argc: number of command-line arguments
+ * @argv: array of command-line arguments
+ *
+ * Return: 0 if the program completed successfully, otherwise a status number
  */
 int main(int argc, char *argv[])
 {
-	if (argc != 3 || !is_digit(argv[1]) || !is_digit(argv[2]))
+	char *num1, *num2, *result;
+
+	if (argc != 3)
 		error();
-	multiply(argv[1], argv[2]);
+
+	num1 = argv[1];
+	num2 = argv[2];
+
+	if (!is_digit(num1) || !is_digit(num2))
+		error();
+
+	result = mul(num1, num2);
+
+	printf("%s\n", result);
+	free(result);
+
 	return (0);
 }
