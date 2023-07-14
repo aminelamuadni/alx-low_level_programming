@@ -10,9 +10,9 @@
  */
 int is_digit(char *s)
 {
-	int i, length = strlen(s);
+	int i;
 
-	for (i = 0; i < length; i++)
+	for (i = 0; s[i] != '\0'; i++)
 	{
 		if (s[i] < '0' || s[i] > '9')
 			return (0);
@@ -85,6 +85,10 @@ int main(int argc, char *argv[])
 	num1 = argv[1];
 	num2 = argv[2];
 	product = multiply(num1, num2);
+
+	/* Remove leading zeros */
+	while (*product == '0' && *(product + 1) != '\0')
+		product++;
 
 	printf("%s\n", product);
 
