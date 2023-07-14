@@ -22,15 +22,6 @@ int is_digit(char *s)
 }
 
 /**
- * print_error - prints error message and exits program
- */
-void print_error(void)
-{
-	printf("Error\n");
-	exit(98);
-}
-
-/**
  * multiply - performs multiplication of two positive numbers
  * @num1: first number
  * @num2: second number
@@ -43,14 +34,13 @@ char *multiply(char *num1, char *num2)
 	int len2 = strlen(num2);
 	int len_res = len1 + len2;
 	int i, j, k, carry;
-	char *result = malloc((len_res + 1) * sizeof(char));
+	char *result = calloc(len_res + 1, sizeof(char));
 
 	if (result == NULL)
-		print_error();
-
-	for (i = 0; i < len_res; i++)
-		result[i] = '0';
-	result[len_res] = '\0';
+	{
+		printf("Error\n");
+		exit(98);
+	}
 
 	for (i = len1 - 1; i >= 0; i--)
 	{
@@ -80,13 +70,15 @@ int main(int argc, char *argv[])
 	char *num1, *num2, *product;
 
 	if (argc != 3 || !is_digit(argv[1]) || !is_digit(argv[2]))
-		print_error();
+	{
+		printf("Error\n");
+		return (98);
+	}
 
 	num1 = argv[1];
 	num2 = argv[2];
 	product = multiply(num1, num2);
 
-	/* Remove leading zeros */
 	while (*product == '0' && *(product + 1) != '\0')
 		product++;
 
