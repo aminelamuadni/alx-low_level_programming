@@ -1,79 +1,64 @@
+#include "main.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
 /**
- * error - print error message and exit program
+ * is_digit - checks if a string contains only digits
+ * @s: string to check
+ *
+ * Return: 0 if string contains non-digits, 1 otherwise
  */
-void error(void)
+int is_digit(char *s)
 {
-	printf("Error\n");
-	exit(98);
-}
+	int i, length = strlen(s);
 
-/**
- * is_digit - check if a string is a number
- * @str: string to check
- * Return: 0 if str is a number, 1 otherwise
- */
-int is_digit(char *str)
-{
-	int i = 0;
-
-	if (!str)
-		return (0);
-	while (*(str + i))
+	for (i = 0; i < length; i++)
 	{
-		if (*(str + i) < '0' || *(str + i++) > '9')
+		if (s[i] < '0' || s[i] > '9')
 			return (0);
 	}
+
 	return (1);
 }
 
 /**
- * multiply - multiply two numbers and print the result
- * @n1: first number
- * @n2: second number
+ * print_error - prints error message and exits program
  */
-void multiply(char *n1, char *n2)
+void print_error(void)
 {
-	int len1, len2, tot, i, j;
-	int *result;
+	int i;
+	char *error = "Error\n";
 
-	len1 = strlen(n1);
-	len2 = strlen(n2);
-	tot = len1 + len2;
-
-	result = calloc(tot, sizeof(int));
-	if (!result)
-		error();
-
-	for (i = len1 - 1; i >= 0; i--)
+	for (i = 0; error[i]; i++)
 	{
-		for (j = len2 - 1; j >= 0; j--)
-		{
-			result[i + j + 1] += ((n1[i] - '0') * (n2[j] - '0'));
-			result[i + j] += result[i + j + 1] / 10;
-			result[i + j + 1] %= 10;
-		}
+		_putchar(error[i]);
 	}
-	for (i = *result; !i && tot > 1; tot--)
-		result++;
-	for (i = 0; i < tot; i++)
-		printf("%d", result[i]);
-	printf("\n");
+
+	exit(98);
 }
 
 /**
- * main - multiply two numbers
+ * main - multiplies two positive numbers
  * @argc: argument count
  * @argv: argument vector
- * Return: 0 on success, 98 on failure
+ *
+ * Return: 0 on success, 1 on failure
  */
 int main(int argc, char *argv[])
 {
+	long num1, num2, product;
+
 	if (argc != 3 || !is_digit(argv[1]) || !is_digit(argv[2]))
-		error();
-	multiply(argv[1], argv[2]);
+	{
+		print_error();
+	}
+
+	num1 = atoi(argv[1]);
+	num2 = atoi(argv[2]);
+	product = num1 * num2;
+
+	printf("%ld\n", product);
+
 	return (0);
 }
