@@ -8,7 +8,7 @@
  */
 listint_t *find_listint_loop(listint_t *head)
 {
-	const listint_t *slow, *fast;
+	listint_t *slow, *fast;
 
 	if (!head)
 		return (NULL);
