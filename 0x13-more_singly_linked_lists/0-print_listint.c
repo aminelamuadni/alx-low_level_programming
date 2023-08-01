@@ -1,4 +1,3 @@
-#include <stdio.h>
 #include "lists.h"
 
 /**
@@ -10,10 +9,27 @@
 size_t print_listint(const listint_t *h)
 {
 	size_t nodes = 0;
+	int n, copy;
+	char c;
 
 	while (h)
 	{
-		printf("%d\n", h->n);
+		n = h->n;
+		if (n < 0)
+		{
+			_putchar('-');
+			n = -n;
+		}
+		copy = n;
+		while (copy /= 10)
+			n = n / 10;
+		while (n > 0)
+		{
+			c = (n % 10) + '0';
+			_putchar(c);
+			n = n / 10;
+		}
+		_putchar('\n');
 		h = h->next;
 		nodes++;
 	}
