@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <stdlib.h>
 #include "lists.h"
 
 /**
@@ -15,11 +14,6 @@ size_t print_listint_safe(const listint_t *head)
 
 	while (head)
 	{
-		if (!head->next)
-		{
-			exit(98);
-		}
-
 		diff = head - head->next;
 		num++;
 		printf("[%p] %d\n", (void *)head, head->n);
