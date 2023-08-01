@@ -31,4 +31,9 @@ int delete_nodeint_at_index(listint_t **head, unsigned int index);
 listint_t *reverse_listint(listint_t **head);
 size_t print_listint_safe(const listint_t *head);
 
+void print_hex(unsigned long n);
+void print_node(const listint_t *node);
+void print_int(int n);
+int _putchar(char c);
+
 #endif /* LISTS_H */
