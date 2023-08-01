@@ -1,15 +1,29 @@
-#include <stdio.h>
 #include "lists.h"
+#include <stdlib.h>
+
+/**
+ * print_hex - prints an address in hexadecimal
+ * @n: the address to print
+ *
+ * Return: void
+ */
+void print_hex(unsigned long n)
+{
+	if (n > 15)
+		print_hex(n / 16);
+	n = n % 16;
+	_putchar(n < 10 ? n + '0' : 'a' + n % 10);
+}
 
 /**
  * print_listint_safe - prints a listint_t linked list
- * @head: pointer to the start of the list
+ * @head: a pointer to the first element of listint_t list
  *
  * Return: the number of nodes in the list
  */
 size_t print_listint_safe(const listint_t *head)
 {
-	size_t nodes = 0;
+	size_t num = 0;
 	const listint_t *slow, *fast;
 
 	if (head == NULL)
@@ -28,21 +42,58 @@ size_t print_listint_safe(const listint_t *head)
 			slow = head;
 			while (slow != fast)
 			{
-				printf("[%p] %d\n", (void *)slow, slow->n);
+				print_node(slow);
 				slow = slow->next;
-				nodes++;
+				num++;
 			}
-			printf("-> [%p] %d\n", (void *)slow, slow->n);
-			return (nodes);
+			print_node(slow);
+			return (num);
 		}
 	}
 
 	while (head != NULL)
 	{
-		printf("[%p] %d\n", (void *)head, head->n);
+		print_node(head);
 		head = head->next;
-		nodes++;
+		num++;
 	}
 
-	return (nodes);
+	return (num);
+}
+
+/**
+ * print_node - prints a node
+ * @node: a pointer to the node to print
+ *
+ * Return: void
+ */
+void print_node(const listint_t *node)
+{
+	_putchar('[');
+	print_hex((unsigned long)node);
+	_putchar(']');
+	_putchar(' ');
+	if (node->n < 0)
+	{
+		_putchar('-');
+		print_int(-node->n);
+	}
+	else
+	{
+		print_int(node->n);
+	}
+	_putchar('\n');
+}
+
+/**
+ * print_int - prints an integer
+ * @n: the integer to print
+ *
+ * Return: void
+ */
+void print_int(int n)
+{
+	if (n / 10)
+		print_int(n / 10);
+	_putchar(n % 10 + '0');
 }
