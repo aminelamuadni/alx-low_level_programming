@@ -1,3 +1,5 @@
+#include <stdio.h>
+#include <stdlib.h>
 #include "lists.h"
 
 /**
@@ -10,34 +12,23 @@ size_t print_listint_safe(const listint_t *head)
 {
 	size_t num = 0;
 	long int diff;
-	const listint_t *temp;
 
 	while (head)
 	{
+		if (!head->next)
+		{
+			exit(98);
+		}
+
 		diff = head - head->next;
 		num++;
-
-		temp = head;
-		while (temp)
-		{
-			_putchar((temp->n / 10) + '0');
-			_putchar((temp->n % 10) + '0');
-			temp = temp->next;
-		}
-		_putchar('\n');
+		printf("[%p] %d\n", (void *)head, head->n);
 
 		if (diff > 0)
 			head = head->next;
 		else
 		{
-			temp = head->next;
-			while (temp)
-			{
-				_putchar((temp->n / 10) + '0');
-				_putchar((temp->n % 10) + '0');
-				temp = temp->next;
-			}
-			_putchar('\n');
+			printf("-> [%p] %d\n", (void *)head->next, head->next->n);
 			break;
 		}
 	}
