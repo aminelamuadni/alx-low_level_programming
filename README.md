@@ -25,3 +25,4 @@
 
 - [0x12. C - Singly linked lists](./0x12-singly_linked_lists)
 - [0x13. C - More singly linked lists](./0x13-more_singly_linked_lists)
+# 0x17. C - Doubly linked lists
