@@ -28,4 +28,3 @@
 
 ## Low-level programming & Algorithm - Linux and Unix system programming
 - [0x15. C - File I/O](./0x15-file_io)
->>>>>>> 99a3e0190fbd7d3163864624fc4f52763d170505
