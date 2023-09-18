@@ -12,7 +12,7 @@ int rand(void)
 {
 	static int count;
 
-	int numbers[6] = {9, 8, 10, 24, 75, 9};
+	int numbers[6] = {8, 8, 7, 9, 23, 74};
 
 	if (count < 6)
 	{
