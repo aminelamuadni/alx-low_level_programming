@@ -61,13 +61,14 @@ shash_node_t *create_new_node(const char *key, const char *value)
 }
 
 /**
- * handle_existing_key - update value of an existing node in the hash table
- * @node: the node with the key that already exists
- * @value: the new value to update the node with
+ * handle_existing_key - Updates value of an existing node in the table.
+ * @node: The node with the key that already exists.
+ * @key: The key associated with the node.
+ * @value: The new value to update the node with.
  *
- * Return: 1 if the value was updated successfully, 0 otherwise
+ * Return: 1 if the value was updated successfully, 0 otherwise.
  */
-int handle_existing_key(shash_node_t *node, const char *value)
+int handle_existing_key(shash_node_t *node, const char *key, const char *value)
 {
 	if (strcmp(node->key, key) == 0)
 	{
@@ -81,14 +82,17 @@ int handle_existing_key(shash_node_t *node, const char *value)
 }
 
 /**
- * insert_into_sorted_list - inserts a node into the sorted doubly linked list
- *                           of the hash table.
- * @ht: the sorted hash table
- * @new_node: the new node to insert into the sorted list
+ * insert_into_sorted_list - Inserts a node into the sorted doubly linked list
+ *						   of the hash table.
+ * @ht: The sorted hash table.
+ * @new_node: The new node to insert into the sorted list.
+ * @key: The key associated with the node.
  *
  * Return: void
  */
-void insert_into_sorted_list(shash_table_t *ht, shash_node_t *new_node)
+void insert_into_sorted_list(shash_table_t *ht,
+							 shash_node_t *new_node,
+							 const char *key)
 {
 	shash_node_t *current_node = ht->shead, *prev_node = NULL;
 
@@ -148,7 +152,7 @@ int shash_table_set(shash_table_t *ht, const char *key, const char *value)
 
 	while (current_node)
 	{
-		if (handle_existing_key(current_node, key))
+		if (handle_existing_key(current_node, key, value))
 			return (1);
 		current_node = current_node->next;
 	}
@@ -160,7 +164,7 @@ int shash_table_set(shash_table_t *ht, const char *key, const char *value)
 	new_node->next = ht->array[index];
 	ht->array[index] = new_node;
 
-	insert_into_sorted_list(ht, new_node);
+	insert_into_sorted_list(ht, new_node, key);
 
 	return (1);
 }
