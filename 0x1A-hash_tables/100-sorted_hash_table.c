@@ -57,11 +57,11 @@ shash_node_t *create_new_node(const char *key, const char *value)
 		free(new_node);
 		return (NULL);
 	}
-	return new_node;
+	return (new_node);
 }
 
 /**
- * handle_existing_key - updates the value of an existing node in the hash table
+ * handle_existing_key - update value of an existing node in the hash table
  * @node: the node with the key that already exists
  * @value: the new value to update the node with
  *
