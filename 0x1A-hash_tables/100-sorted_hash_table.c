@@ -35,6 +35,100 @@ shash_table_t *shash_table_create(unsigned long int size)
 }
 
 /**
+ * create_new_node - creates a new node for the sorted hash table
+ * @key: the key for the new node
+ * @value: the value for the new node
+ *
+ * Return: a pointer to the new node, or NULL on failure
+ */
+shash_node_t *create_new_node(const char *key, const char *value)
+{
+	shash_node_t *new_node = malloc(sizeof(shash_node_t));
+
+	if (!new_node)
+		return (NULL);
+
+	new_node->key = strdup(key);
+	new_node->value = strdup(value);
+	if (!new_node->key || !new_node->value)
+	{
+		free(new_node->key);
+		free(new_node->value);
+		free(new_node);
+		return (NULL);
+	}
+	return new_node;
+}
+
+/**
+ * handle_existing_key - updates the value of an existing node in the hash table
+ * @node: the node with the key that already exists
+ * @value: the new value to update the node with
+ *
+ * Return: 1 if the value was updated successfully, 0 otherwise
+ */
+int handle_existing_key(shash_node_t *node, const char *value)
+{
+	if (strcmp(node->key, key) == 0)
+	{
+		free(node->value);
+		node->value = strdup(value);
+		if (!node->value)
+			return (0);
+		return (1);
+	}
+	return (0);
+}
+
+/**
+ * insert_into_sorted_list - inserts a node into the sorted doubly linked list
+ *                           of the hash table.
+ * @ht: the sorted hash table
+ * @new_node: the new node to insert into the sorted list
+ *
+ * Return: void
+ */
+void insert_into_sorted_list(shash_table_t *ht, shash_node_t *new_node)
+{
+	shash_node_t *current_node = ht->shead, *prev_node = NULL;
+
+	if (!ht->shead)
+	{
+		ht->shead = new_node;
+		ht->stail = new_node;
+		new_node->sprev = NULL;
+		new_node->snext = NULL;
+		return;
+	}
+
+	while (current_node && strcmp(key, current_node->key) > 0)
+	{
+		prev_node = current_node;
+		current_node = current_node->snext;
+	}
+
+	if (!current_node)
+	{
+		prev_node->snext = new_node;
+		new_node->sprev = prev_node;
+		new_node->snext = NULL;
+		ht->stail = new_node;
+	}
+	else
+	{
+		new_node->snext = current_node;
+		new_node->sprev = current_node->sprev;
+
+		if (current_node->sprev)
+			current_node->sprev->snext = new_node;
+		else
+			ht->shead = new_node;
+
+		current_node->sprev = new_node;
+	}
+}
+
+/**
  * shash_table_set - adds an element to the sorted hash table
  * @ht: the hash table
  * @key: the key
@@ -44,7 +138,7 @@ shash_table_t *shash_table_create(unsigned long int size)
 int shash_table_set(shash_table_t *ht, const char *key, const char *value)
 {
 	unsigned long int index;
-	shash_node_t *new_node, *current_node, *prev_node;
+	shash_node_t *current_node, *new_node;
 
 	if (!ht || !key || !*key || !value)
 		return (0);
@@ -54,72 +148,19 @@ int shash_table_set(shash_table_t *ht, const char *key, const char *value)
 
 	while (current_node)
 	{
-		if (strcmp(current_node->key, key) == 0)
-		{
-			free(current_node->value);
-			current_node->value = strdup(value);
-			if (!current_node->value)
-				return (0);
+		if (handle_existing_key(current_node, key))
 			return (1);
-		}
 		current_node = current_node->next;
 	}
 
-	new_node = malloc(sizeof(shash_node_t));
+	new_node = create_new_node(key, value);
 	if (!new_node)
 		return (0);
-
-	new_node->key = strdup(key);
-	new_node->value = strdup(value);
-	if (!new_node->key || !new_node->value)
-	{
-		free(new_node->key);
-		free(new_node->value);
-		free(new_node);
-		return (0);
-	}
 
 	new_node->next = ht->array[index];
 	ht->array[index] = new_node;
 
-	if (!ht->shead)
-	{
-		ht->shead = new_node;
-		ht->stail = new_node;
-		new_node->sprev = NULL;
-		new_node->snext = NULL;
-	}
-	else
-	{
-		current_node = ht->shead;
-		prev_node = NULL;
-
-		while (current_node && strcmp(key, current_node->key) > 0)
-		{
-			prev_node = current_node;
-			current_node = current_node->snext;
-		}
-
-		if (!current_node)
-		{
-			prev_node->snext = new_node;
-			new_node->sprev = prev_node;
-			new_node->snext = NULL;
-			ht->stail = new_node;
-		}
-		else
-		{
-			new_node->snext = current_node;
-			new_node->sprev = current_node->sprev;
-
-			if (current_node->sprev)
-				current_node->sprev->snext = new_node;
-			else
-				ht->shead = new_node;
-
-			current_node->sprev = new_node;
-		}
-	}
+	insert_into_sorted_list(ht, new_node);
 
 	return (1);
 }
