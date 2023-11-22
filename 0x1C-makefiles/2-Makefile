@@ -1,0 +1,27 @@
+# Makefile for project
+
+# Compiler
+CC = gcc
+
+# Source files (wildcard can be used to automatically find all .c files)
+SRC = $(wildcard *.c)
+
+# Object files (substituting .c for .o in SRC)
+OBJ = $(SRC:.c=.o)
+
+# The name of the executable
+NAME = school
+
+# The 'all' rule for building the executable
+all: $(NAME)
+
+$(NAME): $(OBJ)
+	$(CC) $(OBJ) -o $(NAME)
+
+# Rule to generate object files from source files
+%.o: %.c
+	$(CC) -c $< -o $@
+
+# Clean rule for cleaning up
+clean:
+	rm -f $(NAME) $(OBJ)
