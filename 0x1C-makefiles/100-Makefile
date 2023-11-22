@@ -15,12 +15,19 @@ SRC = main.c school.c
 # Object files (substituting .c for .o in SRC)
 OBJ = $(SRC:.c=.o)
 
+# Program to delete files
+RM = rm -f
+
 # The 'all' rule for building the executable
 all: $(NAME)
 
 # Compile and link the program
-$(NAME): $(OBJ) m.h
-	$(CC) $(OBJ) -o $(NAME)
+$(NAME): m.h $(OBJ)
+	$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
+
+# Rule to generate object files from source files
+%.o: %.c
+	$(CC) -c $< -o $@
 
 # Clean rule for deleting Emacs and Vim temporary files and the executable
 clean:
@@ -35,6 +42,3 @@ fclean: clean oclean
 
 # Re rule for forcing recompilation of all source files
 re: fclean all
-
-# Phony targets
-.PHONY: all clean oclean fclean re
