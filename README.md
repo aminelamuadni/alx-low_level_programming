@@ -28,6 +28,7 @@
 - [0x13. C - More singly linked lists](./0x13-more_singly_linked_lists)
 - [0x17. C - Doubly linked lists](./0x17-doubly_linked_lists)
 - [0x19. C - Stacks, Queues - LIFO, FIFO](../../../monty)
+- [0x1A. C - Hash tables](./0x1A-hash_tables)
 
 ## Low-level programming & Algorithm - Linux and Unix system programming
 - [0x15. C - File I/O](./0x15-file_io)
