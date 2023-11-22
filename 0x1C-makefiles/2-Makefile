@@ -1,7 +1,7 @@
 # Makefile for project
 
 # The name of the executable
-TARGET = school
+NAME = school
 
 # Compiler
 CC = gcc
@@ -13,11 +13,11 @@ SRC = main.c school.c
 OBJ = $(SRC:.c=.o)
 
 # The 'all' rule for building the executable
-all: $(TARGET)
+all: $(NAME)
 
-$(TARGET): $(OBJ)
-	$(CC) $(OBJ) -o $(TARGET)
+$(NAME): $(OBJ)
+	$(CC) $(OBJ) -o $(NAME)
 
 # Clean rule for cleaning up
 clean:
-	rm -f $(TARGET)
+	rm -f $(NAME)
