@@ -40,3 +40,6 @@ fclean:
 
 # Re rule for forcing recompilation of all source files
 re: fclean all
+
+# Phony targets
+.PHONY: all clean oclean fclean re
