@@ -9,25 +9,21 @@ CC = gcc
 # Compiler flags
 CFLAGS = -Wall -Werror -Wextra -pedantic
 
-# Source files
-SRC = main.c school.c
+# Source files (wildcard can be used to automatically find all .c files)
+SRC = $(wildcard *.c)
 
 # Object files (substituting .c for .o in SRC)
 OBJ = $(SRC:.c=.o)
 
-# Program to delete files
+# Program to delete files (set by default)
 RM = rm -f
 
 # The 'all' rule for building the executable
 all: $(NAME)
 
 # Compile and link the program
-$(NAME): $(OBJ) m.h
-	$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
-
-# Rule to generate object files from source files
-%.o: %.c
-	$(CC) -c $< -o $@
+$(NAME): $(SRC) m.h
+	$(CC) $(CFLAGS) $(SRC) -o $(NAME)
 
 # Clean rule for deleting Emacs and Vim temporary files and the executable
 clean:
@@ -38,7 +34,9 @@ oclean:
 	$(RM) $(OBJ)
 
 # Fclean rule for deleting Emacs and Vim temporary files, executable, and object files
-fclean: clean oclean
+fclean:
+	$(RM) *~ $(NAME)
+	$(RM) $(OBJ)
 
 # Re rule for forcing recompilation of all source files
 re: fclean all
