@@ -1,0 +1,20 @@
+# Makefile for project
+
+# The name of the executable
+TARGET = school
+
+# Compiler
+CC = gcc
+
+# Source files
+SRC = main.c school.c
+
+# The 'all' rule for building the executable
+all: $(TARGET)
+
+$(TARGET): $(SRC)
+	$(CC) $(SRC) -o $(TARGET)
+
+# Clean rule for cleaning up
+clean:
+	rm -f $(TARGET)
