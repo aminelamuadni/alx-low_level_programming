@@ -13,6 +13,8 @@
 int exponential_search(int *array, size_t size, int value)
 {
 	size_t bound = 1;
+	size_t low;
+	size_t high;
 
 	if (!array)
 		return (-1);
@@ -23,10 +25,11 @@ int exponential_search(int *array, size_t size, int value)
 		bound *= 2;
 	}
 
-	bound = bound < size ? bound : size - 1;
-	printf("Value found between indexes [%lu] and [%lu]\n", bound / 2, bound);
+	low = bound / 2;
+	high = (bound < size) ? bound : size - 1;
+	printf("Value found between indexes [%lu] and [%lu]\n", low, high);
 
-	return (binary_search_print(array, bound / 2, bound, value));
+	return (binary_search_print(array, low, high, value));
 }
 
 /**
@@ -42,17 +45,16 @@ int binary_search_print(int *array, size_t left, size_t right, int value)
 	size_t mid;
 	size_t i;
 
-	printf("Searching in array: ");
-	for (i = left; i <= right; i++)
-	{
-		printf("%d", array[i]);
-		if (i < right)
-			printf(", ");
-	}
-	printf("\n");
-
 	while (left <= right)
 	{
+		printf("Searching in array: ");
+		for (i = left; i <= right; i++)
+		{
+			printf("%d", array[i]);
+			if (i < right)
+				printf(", ");
+		}
+		printf("\n");
 		mid = left + (right - left) / 2;
 
 		if (array[mid] == value)
